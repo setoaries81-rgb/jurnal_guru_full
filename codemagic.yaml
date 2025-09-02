@@ -1,0 +1,18 @@
+workflows:
+  build-android-web:
+    name: Build Android APK and Web
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Ensure android/web folders (flutter create)
+        script: flutter create .
+      - name: Build Android APK (release)
+        script: flutter build apk --release
+      - name: Build Web (release)
+        script: flutter build web --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/web
